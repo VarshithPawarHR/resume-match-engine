@@ -1,0 +1,20 @@
+[project]
+name = "context-cache-system"
+version = "0.1.0"
+description = "A system for analyzing job descriptions and resumes using Gemini API with context caching"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "docling>=2.53.0",
+    "google-genai>=1.38.0",
+    "pymupdf>=1.22.0", # For PDF processing
+    "python-docx>=0.8.11", # For DOCX processing
+    "python-dotenv>=1.0.0", # For loading environment variables
+    "tenacity>=9.1.2",
+    "fastapi>=0.110.0", # For API endpoints
+    "uvicorn>=0.29.0", # ASGI server
+    "python-multipart>=0.0.9", # For handling file uploads
+    "aiofiles>=24.1.0", # For async file operations
+    "pypdf2>=3.0.1",
+    "psycopg2-binary>=2.9.0", # For PostgreSQL database
+]
