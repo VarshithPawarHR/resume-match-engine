@@ -139,20 +139,6 @@ for resume_path, result in parallel_results.items():
     print(result)
 ```
 
-### Testing Script
-
-The project includes a convenient testing script:
-
-```bash
-# Test single resume analysis
-python test_ats.py --mode single --jd path/to/job_description.pdf --resume path/to/resume.pdf --output-dir results
-
-# Test batch processing with Batch API
-python test_ats.py --mode batch --jd path/to/job_description.pdf --resume-dir path/to/resumes_folder --output-dir results --batch-method inline
-
-# Test batch processing with Parallel Processing
-python test_ats.py --mode batch --jd path/to/job_description.pdf --resume-dir path/to/resumes_folder --output-dir results --parallel --max-workers 5
-```
 
 ## Output Structure
 
