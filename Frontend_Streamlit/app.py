@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import uuid
 
-API_URL = "http://localhost:8000"  # FastAPI backend
+API_URL = "http://40.81.227.204:3000/"  # FastAPI backend
 
 st.set_page_config(page_title="ATS Resume Scoring", layout="wide")
 st.markdown(
