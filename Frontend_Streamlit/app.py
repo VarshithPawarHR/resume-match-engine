@@ -24,7 +24,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("🚀 Modern ATS Resume Scoring System")
+st.title("Modern ATS Resume Scoring System")
 
 # --- User UUID ---
 user_uuid = st.text_input("Enter Your User UUID", "")
@@ -53,7 +53,7 @@ if tab == "Single Resume":
 
             if response.status_code == 200:
                 results = response.json()["analysis_results"]
-                st.success("✅ Analysis completed!")
+                st.success("Analysis completed!")
 
                 for res in results:
                     analysis = res["analysis"]
@@ -62,7 +62,7 @@ if tab == "Single Resume":
 
                     color = "#4CAF50" if fit_level == "HIGH_FIT" else "#FF9800" if fit_level == "MEDIUM_FIT" else "#F44336"
 
-                    st.markdown(f"### 📄 {res['resume_file']}")
+                    st.markdown(f"###  {res['resume_file']}")
                     st.progress(fit_score / 100.0)
                     st.markdown(f"**Fit Level:** <span style='color:{color}; font-weight:bold'>{fit_level}</span>",
                                 unsafe_allow_html=True)
@@ -70,10 +70,10 @@ if tab == "Single Resume":
 
                     with st.expander("Key Strengths"):
                         for s in analysis.get("key_strengths", []):
-                            st.markdown(f"- ✅ {s}")
+                            st.markdown(f"-  {s}")
                     with st.expander("Major Concerns"):
                         for c in analysis.get("major_concerns", []):
-                            st.markdown(f"- ⚠️ {c}")
+                            st.markdown(f"-  {c}")
 
                     col1, col2 = st.columns(2)
                     with col1:
@@ -112,7 +112,7 @@ else:  # Bulk Resumes
 
             if response.status_code == 200:
                 results = response.json()["analysis_results"]
-                st.success(f"✅ Bulk analysis completed: {len(results)} resumes")
+                st.success(f" Bulk analysis completed: {len(results)} resumes")
 
                 for res in results:
                     analysis = res["analysis"]
@@ -121,7 +121,7 @@ else:  # Bulk Resumes
 
                     color = "#4CAF50" if fit_level == "HIGH_FIT" else "#FF9800" if fit_level == "MEDIUM_FIT" else "#F44336"
 
-                    st.markdown(f"### 📄 {res['resume_file']}")
+                    st.markdown(f"###  {res['resume_file']}")
                     st.progress(fit_score / 100.0)
                     st.markdown(f"**Fit Level:** <span style='color:{color}; font-weight:bold'>{fit_level}</span>",
                                 unsafe_allow_html=True)
@@ -129,14 +129,14 @@ else:  # Bulk Resumes
 
                     with st.expander("Key Strengths"):
                         for s in analysis.get("key_strengths", []):
-                            st.markdown(f"- ✅ {s}")
+                            st.markdown(f"-  {s}")
                     with st.expander("Major Concerns"):
                         for c in analysis.get("major_concerns", []):
-                            st.markdown(f"- ⚠️ {c}")
+                            st.markdown(f"-  {c}")
 
 # --- Previous Results ---
 st.markdown("---")
-st.subheader("📊 View Previous Results")
+st.subheader(" View Previous Results")
 user_uuid_view = st.text_input("Enter User UUID to Fetch Results", key="view_uuid")
 
 if st.button("Fetch Results"):
@@ -154,7 +154,7 @@ if st.button("Fetch Results"):
                 fit_level = analysis.get("fit_level", "NO_FIT")
                 color = "#4CAF50" if fit_level == "HIGH_FIT" else "#FF9800" if fit_level == "MEDIUM_FIT" else "#F44336"
 
-                st.markdown(f"### 📄 {analysis.get('candidate_name', 'Unknown')}")
+                st.markdown(f"###  {analysis.get('candidate_name', 'Unknown')}")
                 st.progress(fit_score / 100.0)
                 st.markdown(f"**Fit Level:** <span style='color:{color}; font-weight:bold'>{fit_level}</span>",
                             unsafe_allow_html=True)
