@@ -20,10 +20,31 @@ services:
     networks:
       - postgres_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U shreesha -d Userbase_socialOps"]
+      test: ["CMD-SHELL", "pg_isready -U shreesha -d ResumeRelevancy"]
       interval: 30s
       timeout: 10s
       retries: 3
+
+  backend:
+    build: .
+    container_name: backend_app
+    restart: unless-stopped
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ResumeRelevancy
+      POSTGRES_USER: shreesha
+      POSTGRES_PASSWORD: shreeshaaithal
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - postgres_network
+    volumes:
+      - ../uploads:/app/uploads
+      - ../samples:/app/samples
 
   # Optional: Add pgAdmin for database management
   pgadmin:
