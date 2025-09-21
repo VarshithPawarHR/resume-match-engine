@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: ResumeRelevancy
       POSTGRES_USER: shreesha
-      POSTGRES_PASSWORD: shreeshaaithal
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-shreeshaaithal}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
@@ -15,15 +15,37 @@ services:
       - postgres_data:/var/lib/postgresql/data
       # Optional: Mount initialization scripts
       - ./init-scripts:/docker-entrypoint-initdb.d:ro
-      # Optional: Mount custom postgresql.conf
-      # - ./postgresql.conf:/etc/postgresql/postgresql.conf:ro
     networks:
       - postgres_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U shreesha -d Userbase_socialOps"]
+      test: ["CMD-SHELL", "pg_isready -U shreesha -d ResumeRelevancy"]
       interval: 30s
       timeout: 10s
       retries: 3
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Changed from lowercase to uppercase
+    container_name: backend_app
+    restart: unless-stopped
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ResumeRelevancy
+      POSTGRES_USER: shreesha
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-shreeshaaithal}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - postgres_network
+    volumes:
+      # Fixed volume paths based on your directory structure
+      - ../uploads:/app/uploads
+      - ../samples:/app/samples
 
   # Optional: Add pgAdmin for database management
   pgadmin:
@@ -31,17 +53,20 @@ services:
     container_name: pgadmin
     restart: unless-stopped
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin_password
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@example.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin_password}
     ports:
       - "8080:80"
     depends_on:
       - postgres
     networks:
       - postgres_network
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
 
 volumes:
   postgres_data:
+  pgadmin_data:
 
 networks:
   postgres_network:
