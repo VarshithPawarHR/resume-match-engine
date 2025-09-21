@@ -4,28 +4,29 @@ import Project from '../components/Project.astro';
 import Sidebar from '../components/Sidebar.astro';
 const projects = [
   {
-    title: "TeleJS",
+    title: "AI-powered evaluation of resumes against job descriptions.",
     desc: [
-      "Built a lightweight, open-source Slack API framework for efficient bot development",
-      "Developed in Node.js and published as an NPM package"
+      "Instantly identifies candidate strengths, skills, and experience fit Delivers clear, structured insights including overall fit score and recommendation Helps recruiters focus on the most qualified candidates"
     ],
-    tech: ["Node.js", "NPM"]
+    tech: ["Python", "Gemini  api", "Streamlit", "Postgres", "Azure"]
   },
   {
-    title: "pyPrompter",
+    title: "Bulk and single  Resume Processor",
     desc: [
-      "Contributed to a popular open-source Python pip package for building interactive CLIs",
-      "Developed a feature that lets you 'freeze' inquirer choices"
+      "Handles small or large batches efficiently with parallel processing or Batch API",
+      "Automatically extracts key metrics and rankings for all candidates",
+      "Saves hours of manual review time"
     ],
-    tech: ["Python"]
+    tech: ["Python","FastAPI","asyncio","Postgres"]
   },
   {
-    title: "WebAssetHub",
+    title: "Skills & Experience Matcher",
     desc: [
-      "Created a web scraper tool that monitors digital assets across multiple platforms and offers them at competitive prices",
-      "Sold over 700 items"
+      "Scores required and preferred skills matches automatically",
+      "Highlights missing critical skills and evaluates impact on role fit",
+      "Provides detailed skill gap analysis for targeted candidate feedback"
     ],
-    tech: ["Python", "Selenium"]
+    tech: ["Streamlit","Gemini  api", "Postgres", "Azure"]
   }
 ];
 ---
@@ -33,10 +34,10 @@ const projects = [
 <!DOCTYPE html>
 <html
 >
-  <Header title="Personal Projects | Sam Bernstein" />
+  <Header title="How it works" />
   <body>
     <div class="content">
-        <Sidebar selectedItem="personal-projects" />
+        <Sidebar selectedItem="how-it-works " />
       <nav class="main">
         <div class="container">
           <div class="back-nav-container">
@@ -46,7 +47,7 @@ const projects = [
             >
           </div>
           <div class="content-container">
-            <h1>Personal Projects</h1>
+            <h1>How it works</h1>
             <section class="items-container">
                 <div class="resouce-items">
                     {projects.map(project => (
